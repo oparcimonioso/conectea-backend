@@ -1,7 +1,5 @@
 package com.conectea.backend.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -20,7 +18,6 @@ import java.util.regex.Pattern;
 @Service
 public class GeocodingService {
 
-    private static final Logger logger = LoggerFactory.getLogger(GeocodingService.class);
     private static final Pattern CEP_PATTERN = Pattern.compile("\\d{5}-?\\d{3}");
 
     public double[] getCoordinates(String endereco) {
@@ -31,7 +28,6 @@ public class GeocodingService {
         if (coords == null) {
             String cep = extractCEP(endereco);
             if (cep != null) {
-                logger.info("Tentando geocodificação com CEP: {}", cep);
                 coords = fetchCoordinates(cep);
             }
         }
@@ -40,7 +36,6 @@ public class GeocodingService {
         if (coords == null) {
             String cidadeEstado = extractCidadeEstado(endereco);
             if (cidadeEstado != null) {
-                logger.info("Tentando geocodificação com cidade/estado: {}", cidadeEstado);
                 coords = fetchCoordinates(cidadeEstado);
             }
         }
@@ -49,7 +44,6 @@ public class GeocodingService {
     }
 
     private double[] fetchCoordinates(String endereco) {
-        logger.info("Geocodificando: {}", endereco);
         try {
             String enderecoNormalizado = normalizeAddress(endereco);
             String url = buildGeocodingUrl(enderecoNormalizado);
@@ -77,11 +71,10 @@ public class GeocodingService {
                 Map<String, Object> place = results.get(0);
                 double lat = Double.parseDouble(place.get("lat").toString());
                 double lon = Double.parseDouble(place.get("lon").toString());
-                logger.info("Coordenadas encontradas: lat={}, lon={}", lat, lon);
                 return new double[]{lat, lon};
             }
         } catch (Exception e) {
-            logger.error("Erro na geocodificação", e);
+            // Falha silenciosa
         }
         return null;
     }
