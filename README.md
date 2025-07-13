@@ -9,7 +9,7 @@ Este projeto tem como objetivo viabilizar e melhorar o acesso à educação para
 
 Clone esse repositório:
 ```bash
-git clone https://github.com/oparcimonioso/conectea-backtend.git
+git clone https://github.com/oparcimonioso/conectea-backend.git
 cd conectea-backend
 ```
 Inicie a aplicação:
