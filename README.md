@@ -18,7 +18,7 @@ Inicie a aplicação:
 - Depois em "Run as"
 - Selecione: "Run as Spring Boot App"
 
-# Lembre-se: Você precisa ter o Angular instalado em seu computador e o Node.js atualizado.
+# Lembre-se: Você precisa ter o Eclipse ou Spring Tool Suit instalado em seu computador e o Java IDK 21 atualizado.
 
 ** Dados do projeto **
 
